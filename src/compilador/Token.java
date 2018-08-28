@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package compilador;      //alterei aqui 
+package compilador;     
 
 /**
  *
@@ -12,6 +12,15 @@ package compilador;      //alterei aqui
 public class Token {
     private String nome;
     private int codigo;
+    private int linha;
+
+    public int getLinha() {
+        return linha;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
+    }
 
     public String getNome() {
         return nome;
@@ -28,4 +37,9 @@ public class Token {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
+    public Token novoToken(){
+        Token token = new Token();
+        return token;
+    }
+    
 }
