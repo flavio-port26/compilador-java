@@ -16,54 +16,68 @@ import java.util.Stack;
 public class Identificador {
 
     public Identificador(String token) {
-        
+
     }
-    
-   
-    public int identOperadores(String token){
-      Map<String,Integer> resevadas = new HashMap<>();
+
+    public int identOperadores(String token) {
+        Map<String, Integer> resevadas = new HashMap<>();
         return 0;
     }
-    public int identRelacionais(String token){
+
+    public int identRelacionais(String token) {
         return 0;
     }
 
     public int identReservada(String token) {
         int cod = 25;
-        Map<String,Integer> resevadas = new HashMap<>();
-        resevadas.put( "AND",23);
-        resevadas.put("ARRAY",23);
-        resevadas.put("BEGIN",23);
-        
-        /*resevadas.put(23, "CALL");
-        resevadas.put(23, "CASE");
-        resevadas.put(23, "CONST");
-        resevadas.put(23, "DO");
-        resevadas.put(23, "ELSE");
-        resevadas.put(23, "END");
-        resevadas.put(23, "FOR");
-        resevadas.put(23, "GOTO");
-        resevadas.put(23, "IF");
-        resevadas.put(23, "INTEGER");
-        resevadas.put(23, "LABEL");
-        resevadas.put(23, "NOT");
-        resevadas.put(23, "OF");
-        resevadas.put(23, "OR");
-        resevadas.put(23, "PROCEDURE");
-        resevadas.put(23, "PROGRAM");
-        resevadas.put(23, "READLN");
-        resevadas.put(23, "REPEAT");
-        resevadas.put(23, "THEN");
-        resevadas.put(23, "TO");
-        resevadas.put(23, "UNTIL");
-        resevadas.put(23, "VAR");
-        resevadas.put(23, "WHILE");
-        resevadas.put(23, "WRITELN");
-       */
-      if(resevadas.containsKey(token)){
-          return cod=resevadas.get(token);
-      }else
-        return cod;
+        Map<Integer, String> resevadas = new HashMap<>();
+        resevadas.put(1, "Program");
+        resevadas.put(2, "Label");
+        resevadas.put(3, "Const");
+        resevadas.put(4, "Var");
+        resevadas.put(5, "Procedure");
+        resevadas.put(6, "Begin");
+        resevadas.put(7, "End");
+        resevadas.put(8, "Integer");
+        resevadas.put(9, "Array");
+        resevadas.put(10, "Of");
+        resevadas.put(11, "Call");
+        resevadas.put(12, "Goto");
+        resevadas.put(13, "If");
+        resevadas.put(14, "Then");
+        resevadas.put(15, "Else");
+        resevadas.put(16, "While");
+        resevadas.put(17, "Do");
+        resevadas.put(18, "Repeat");
+        resevadas.put(19, "Until");
+        resevadas.put(20, "Readln");
+        resevadas.put(21, "Writeln");
+        resevadas.put(22, "Or");
+        resevadas.put(23, "And");
+        resevadas.put(24, "Not");
+        resevadas.put(25, "Identificador");
+        resevadas.put(26, "Inteiro");
+        resevadas.put(27, "For");
+        resevadas.put(28, "To");
+        resevadas.put(29, "Case");
+        resevadas.put(30, "+");
+        resevadas.put(31, "-");
+        resevadas.put(32, "*");
+        resevadas.put(33, "/");
+        resevadas.put(34, "[");
+        resevadas.put(35, "]");
+        resevadas.put(36, "(");
+        resevadas.put(37, ")");
+        resevadas.put(38, ":=");
+        resevadas.put(39, ":");
+        resevadas.put(40, "=");
+        resevadas.put(41, ">");
+
+        if (resevadas.containsKey(token)) {
+            return cod = resevadas.get(token);
+        } else {
+            return cod;
+        }
     }
 
 }
