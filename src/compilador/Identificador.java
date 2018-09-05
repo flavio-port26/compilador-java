@@ -30,9 +30,9 @@ public class Identificador {
 
     public int identReservada(String token) {
         int cod = 25;
-        Map<Integer, String> resevadas = new HashMap<>();
-        resevadas.put(1, "Program");
-        resevadas.put(2, "Label");
+        Map<String, Integer> resevadas = new HashMap<>();
+        resevadas.put("program", 1);
+        /*resevadas.put(2, "Label");
         resevadas.put(3, "Const");
         resevadas.put(4, "Var");
         resevadas.put(5, "Procedure");
@@ -71,12 +71,14 @@ public class Identificador {
         resevadas.put(38, ":=");
         resevadas.put(39, ":");
         resevadas.put(40, "=");
-        resevadas.put(41, ">");
-
-        if (resevadas.containsKey(token)) {
-            return cod = resevadas.get(token);
+        resevadas.put(41, ">");*/
+        
+        if (resevadas.containsKey(token.toLowerCase())) {
+            return resevadas.get(token.toLowerCase());
+        } else if (Integer) {
+            return 26;
         } else {
-            return cod;
+            return 25;
         }
     }
 

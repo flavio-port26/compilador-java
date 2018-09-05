@@ -37,9 +37,12 @@ public class Token {
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
-    public Token novoToken(){
-        Token token = new Token();
-        return token;
+    public static Token novoToken(){
+        return new Token();
     }
-    
+
+    @Override
+    public String toString() {
+        return "Token{" + "nome=" + nome + ", codigo=" + codigo + ", linha=" + linha + '}';
+    }
 }

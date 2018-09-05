@@ -9,30 +9,7 @@ public class Compilador {
     public static void main(String args[]) {
 
         String texto
-                = "Program testeproc1;\n"
-                + "Var\n"
-                + " X, y, z :integer;\n"
-                + "Procedure P;\n"
-                + "Var\n"
-                + " A :integer;\n"
-                + "Begin\n"
-                + " Readln(a);\n"
-                + " If a=x then\n"
-                + " z:=z+x\n"
-                + " Else begin\n"
-                + " Z:=z-x;\n"
-                + " Call p;\n"
-                + " End;\n"
-                + "End;\n"
-                + "Begin\n"
-                + " Z:=0;\n"
-                + " Readln(x,y);\n"
-                + " If x>y then\n"
-                + " Call p\n"
-                + " Else\n"
-                + " Z:=z+x+y;\n"
-                + " Writeln(z);\n"
-                + "End. ";
+               = "Program ";
         String pronta = "";
         Character prox = null;
         Character atual = null;
@@ -41,7 +18,7 @@ public class Compilador {
         Identificador id = new Identificador(texto);
         int linha = 1;
         int cont = 1;
-
+        
         for (int i = 0; i < texto.length(); i++) {
             atual = texto.charAt(i);
             pronta += atual.toString();
@@ -55,11 +32,12 @@ public class Compilador {
                 }
 
                 if (cont == texto.length() - 1) {
-                    if (prox.isSpaceChar(cont) == false) {
-                        token.novoToken();  //Manda para o identificador o que esta no pronta quando nao tem mais texto
+                    if (Character.isSpaceChar(prox)) {
+                        token = Token.novoToken();  //Manda para o identificador o que esta no pronta quando nao tem mais texto
                         token.setCodigo(id.identReservada(pronta));
                         token.setNome(pronta);
                         token.setLinha(linha);
+                        System.out.println(token);
                         pilha.push(token);
                         if(pronta.equals("+")){
                             
