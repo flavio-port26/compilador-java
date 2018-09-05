@@ -9,12 +9,6 @@ package compilador;
  *
  * @author comp16
  */
-public class Leitor {
-    public void lerInteiro(){
-        
-    }
+public class Reservadas {
     
-    public void lerIdentificador(){
-        
-    }
 }
