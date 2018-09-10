@@ -36,7 +36,7 @@ public class Compilador {
         Token token = null;
         Stack<Token> pilha = new Stack();
         Identificador id = new Identificador(texto);
-        int linha = 1;
+       
         int cont = 1;
         Reservadas reservada = new Reservadas();
 
@@ -48,33 +48,36 @@ public class Compilador {
 
                 prox = texto.charAt(cont);
 
-                  if (atual.toString().equals('/') && prox.toString().equals('n')) { //Conta +1 na linha quando acha um /n
-                    linha++;
-                  }
-                if (cont == texto.length() - 1) {
+                
+                   if (cont == texto.length() - 1) {
                     if (Character.isSpaceChar(prox)) {
                         token = Token.novoToken();  //Manda para o identificador o que esta no pronta quando nao tem mais texto
                         token.setCodigo(id.identReservada(pronta));
                         token.setNome(pronta);
-                        token.setLinha(linha);
+                    
                         System.out.println(token);
                         pilha.push(token);
-
-                        if (Character.isSpaceChar(prox)/*ou prox.toString.equals(reservada.especial(prox))*/) {// |Manda para o  indentificador quando acha o prox for um espaço
+                        pronta="";
+                        i=i+1;
+                    }
+                  }
+                    else if (Character.isSpaceChar(prox) || reservada.especiais(prox.toString())) {// |Manda para o  indentificador quando acha o prox for um espaço
                             if (reservada.passaInteiro(pronta)) {
                                 token = Token.novoToken();  //Manda para o identificador o que esta no pronta quando nao tem mais texto
                                 token.setNome(pronta);
-                                token.setLinha(linha);
+                  
                                 pronta = "inteiro";
                                 token.setCodigo(id.identReservada(pronta));
                                 System.out.println(token);
                                 pilha.push(token);
+                                pronta="";
                             } else {
                                 token = Token.novoToken();
                                 token.setCodigo(id.identReservada(pronta));
                                 token.setNome(pronta);
-                                token.setLinha(linha);
+                                
                                 pilha.push(token);
+                                pronta="";
                             }
 
                         } else if (reservada.relacionais(atual.toString())) {
@@ -83,14 +86,16 @@ public class Compilador {
                                 token = Token.novoToken();
                                 token.setCodigo(id.identReservada(pronta));
                                 token.setNome(pronta);
-                                token.setLinha(linha);
+                            
                                 pilha.push(token);
+                                pronta="";
                             } else {
                                 token = Token.novoToken();
                                 token.setCodigo(id.identReservada(pronta));
                                 token.setNome(pronta);
-                                token.setLinha(linha);
+                         
                                 pilha.push(token);
+                                pronta="";
                             }
                         } else if (reservada.especiais(pronta)) {
                             if (reservada.especiais(prox.toString())) {
@@ -98,14 +103,16 @@ public class Compilador {
                                 token = Token.novoToken();
                                 token.setCodigo(id.identReservada(pronta));
                                 token.setNome(pronta);
-                                token.setLinha(linha);
+                      
                                 pilha.push(token);
+                                pronta="";
                             } else {
                                 token = Token.novoToken();
                                 token.setCodigo(id.identReservada(pronta));
                                 token.setNome(pronta);
-                                token.setLinha(linha);
+                            
                                 pilha.push(token);
+                                pronta="";
                             }
                         } else if (pronta.equals("'")) {
                             int aux = i + 1;
@@ -126,5 +133,5 @@ public class Compilador {
             }
         }
 		
-    }
-}
+    
+

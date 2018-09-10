@@ -12,15 +12,9 @@ package compilador;
 public class Token {
     private String nome;
     private int codigo;
-    private int linha;
 
-    public int getLinha() {
-        return linha;
-    }
 
-    public void setLinha(int linha) {
-        this.linha = linha;
-    }
+ 
 
     public String getNome() {
         return nome;
@@ -43,6 +37,6 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" + "nome=" + nome + ", codigo=" + codigo + ", linha=" + linha + '}';
+        return "Token{" + "nome=" + nome + ", codigo=" + codigo;
     }
 }

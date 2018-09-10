@@ -45,7 +45,6 @@ public class Identificador {
         resevadas.put("or", 22);
         resevadas.put("and", 23);
         resevadas.put("not", 24);
-        resevadas.put("identificador", 25);
         resevadas.put("inteiro", 26);
         resevadas.put("for", 27);
         resevadas.put("to", 28);
@@ -67,7 +66,7 @@ public class Identificador {
         resevadas.put("<=", 44);
         resevadas.put("< >", 45);
         resevadas.put(",", 46);
-        resevadas.put("; ", 47);
+        resevadas.put(";", 47);
         resevadas.put("literal", 48);
         resevadas.put(".", 49);
         resevadas.put("..", 50);
