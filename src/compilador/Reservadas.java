@@ -21,15 +21,11 @@ public class Reservadas {
     }
 
     public Boolean relacionais(String token) {
-        if (token.equals("=") || token.equals("<") || token.equals(">")) {
-            return true;
-        } else {
-            return false;
-        }
+         return token.equals("=") || token.equals("<") || token.equals(">");
     }
 
     public Boolean especiais(String token) {
-        if (       token.equals(",")
+          return token.equals(",")
                 || token.equals(";")
                 || token.equals(".")
                 || token.equals("(")
@@ -38,13 +34,12 @@ public class Reservadas {
                 || token.equals("..")
                 || token.equals("[")
                 || token.equals("]")
-                || token.equals("´") 
-                || token.equals("_")) {
-            return true;
-        }else{
-            return false;
-    }
+                || token.equals("´")
+                || token.equals("_");
 }
+    public Boolean operadores(String token){
+        return token.equals("+") || token.equals("-") || token.equals("/")|| token.equals("*");
+    }
     
 
 }
