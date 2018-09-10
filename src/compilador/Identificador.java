@@ -19,18 +19,18 @@ public class Identificador {
 
     }
     public int identReservada(String token) {
-        int cod = 25;
+        
         Map<String, Integer> resevadas = new HashMap<>();
-        resevadas.put("program", 1);
-        resevadas.put("label", 2);
-        resevadas.put("const", 3);
-        resevadas.put("var", 4);
-        resevadas.put("procedure", 5);
-        resevadas.put("begin", 6);
-        resevadas.put("end", 7);
-        resevadas.put("integer", 8);
-        resevadas.put("array", 9);
-        resevadas.put("of", 10);
+        resevadas.put("program",1);
+        resevadas.put("label",2);
+        resevadas.put("const",3);
+        resevadas.put("var",4);
+        resevadas.put("procedure",5);
+        resevadas.put("begin",6);
+        resevadas.put("end",7);
+        resevadas.put("integer",8);
+        resevadas.put("array",9);
+        resevadas.put("of",10);
         resevadas.put("call", 11);
         resevadas.put("goto", 12);
         resevadas.put("if", 13);

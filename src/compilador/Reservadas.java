@@ -34,7 +34,6 @@ public class Reservadas {
                 || token.equals("..")
                 || token.equals("[")
                 || token.equals("]")
-                || token.equals("´")
                 || token.equals("_");
 }
     public Boolean operadores(String token){
