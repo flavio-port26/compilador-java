@@ -36,9 +36,8 @@ public class Reservadas {
                 || token.equals("]")
                 || token.equals("_");
 }
-    public Boolean operadores(String token){
+    public Boolean aritimeticos(String token){
         return token.equals("+") || token.equals("-") || token.equals("/")|| token.equals("*");
     }
-    
 
 }
