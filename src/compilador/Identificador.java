@@ -14,10 +14,6 @@ import java.util.Stack;
  * @author User
  */
 public class Identificador {
-
-    public Identificador(String token) {
-
-    }
     public int identReservada(String token) {
         
         Map<String, Integer> resevadas = new HashMap<>();
