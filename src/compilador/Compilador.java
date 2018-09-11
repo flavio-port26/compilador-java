@@ -113,13 +113,13 @@ public class Compilador {
                     token = Token.novoToken();
                     token.setCodigo(id.identReservada(pronta));
                     token.setNome(pronta);
-                    System.out.println(token);
+                
                     pilha.push(token);
                 } else if (reservada.operadores(atual.toString())) {
                     token = Token.novoToken();
                     token.setCodigo(id.identReservada(pronta));
                     token.setNome(pronta);
-                    System.out.println(token);
+                 
                     pilha.push(token);
                 } else if (Character.isSpaceChar(prox)
                         || reservada.especiais(prox.toString())
@@ -131,7 +131,7 @@ public class Compilador {
 
                         pronta = "inteiro";
                         token.setCodigo(id.identReservada(pronta));
-                        System.out.println(token);
+                      
                         pilha.push(token);
                         pronta = "";
                     } else {
