@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package compilador;     
+package analizadorLexico;     
 
 /**
  *
@@ -37,6 +37,6 @@ public class Token {
 
     @Override
     public String toString() {
-        return "Token{" + "nome=" + nome + ", codigo=" + codigo;
+        return "Token: " + "nome= " + nome + ", codigo= " + codigo;
     }
 }
