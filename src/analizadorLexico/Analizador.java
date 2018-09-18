@@ -2,7 +2,7 @@ package analizadorLexico;
 
 import java.util.Stack;
 
-public class Compilador {
+public class Analizador {
 
     public Stack<Token> analizar(String texto) {
 
@@ -11,7 +11,7 @@ public class Compilador {
         Character atual;
         Token token;
         Stack<Token> pilha = new Stack();
-        Identificador id = new Identificador();
+        Terminais id = new Terminais();
         String monta = "";
 
         int aux = 0;
@@ -27,8 +27,19 @@ public class Compilador {
 
             prox = texto.charAt(aux);
             if (atual.toString().equals(" ")) { //ignora espaço
-
-            } else if (reservada.aritimeticos(monta.trim())) {// reservada aritimetico
+           
+            }else if (reservada.comentario(monta.trim(),prox.toString().trim())) {
+                  i++;
+                while (!atual.toString().trim().equals("*")&& !prox.toString().trim().equals(")")) {
+                    i++;
+                    atual = texto.charAt(i);
+                    aux++;
+                    prox= texto.charAt(aux);
+                }
+                i++;
+                aux+=2;
+                monta="";
+            }else if (reservada.aritimeticos(monta.trim())) {// reservada aritimetico
 
                 token = Token.novoToken();
                 token.setCodigo(id.identReservada(monta.trim()));
@@ -95,7 +106,7 @@ public class Compilador {
                     || reservada.relacionais(prox.toString())
                     || reservada.aritimeticos(prox.toString())) {
                 if (reservada.passaInteiro(monta.trim())) { // se é inteiro
-                    System.out.println("6");
+                  
 
                     token = Token.novoToken();
                     token.setNome(monta.trim());

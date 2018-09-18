@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author User
  */
-public class Identificador {
+public class Terminais {
     public int identReservada(String token) {
         
         Map<String, Integer> resevadas = new HashMap<>();

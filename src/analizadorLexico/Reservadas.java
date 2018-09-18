@@ -40,5 +40,12 @@ public class Reservadas {
     public Boolean aritimeticos(String token){
         return token.equals("+") || token.equals("-") || token.equals("/")|| token.equals("*");
     }
+    
+        public Boolean comentario(String atual, String prox){
+        if(atual.equals("(")&& prox.equals("*")){
+            return true;
+        }
+        else return false;
+    }
 
 }

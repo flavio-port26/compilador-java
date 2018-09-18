@@ -6,7 +6,7 @@
 package visual;
 
 import analizadorLexico.tabelaLexica;
-import analizadorLexico.Compilador;
+import analizadorLexico.Analizador;
 import analizadorLexico.Token;
 import java.io.File;
 import java.io.FileInputStream;
@@ -239,7 +239,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jTable1.setVisible(true);
         tabelaLexica.setVisible(true);
         jTabbedPaneConsole.setVisible(true);       
-        Compilador lexico= new Compilador();
+        Analizador lexico= new Analizador();
         Stack<Token> pilha = new Stack();
         pilha=lexico.analizar(areaTxt.getText());
         tabelaLexica tabela= new tabelaLexica(pilha);
