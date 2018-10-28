@@ -1,4 +1,9 @@
-package analizadorLexico;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package analizadorSintatico;
 
 
 import pilha.Token;
@@ -6,6 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
 import javax.swing.table.AbstractTableModel;
+
+public class tabelaSintatica {
+
 
 public class tabelaLexica extends AbstractTableModel {
     private final Stack<Token> bufferTokens;
@@ -46,4 +54,4 @@ public class tabelaLexica extends AbstractTableModel {
         }
     }
 }
-
+}

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package analizadorLexico;
+package pilha;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,7 +13,7 @@ import java.util.Map;
  *
  * @author User
  */
-public class Terminais {
+public class Verificador {
     public int identReservada(String token) {
         
         Map<String, Integer> resevadas = new HashMap<>();
@@ -67,6 +67,41 @@ public class Terminais {
         resevadas.put(".", 49);
         resevadas.put("..", 50);
         resevadas.put("$", 51);
+        resevadas.put("programa", 52);
+        resevadas.put("bloco", 53);
+        resevadas.put("dclrot", 54);
+        resevadas.put("lid", 55);
+        resevadas.put("repident", 56);
+        resevadas.put("dclconst", 57);
+        resevadas.put("ldconst", 58);
+        resevadas.put("dclvar", 59);
+        resevadas.put("ldvar", 60);
+        resevadas.put("tipo", 61);
+        resevadas.put("dclprod", 62);
+        resevadas.put("defpar", 63);
+        resevadas.put("corpo", 64);
+        resevadas.put("repcomando", 65);
+        resevadas.put("comando", 66);
+        resevadas.put("rcomid", 67);
+        resevadas.put("rvar", 68);
+        resevadas.put("parametros", 69);
+        resevadas.put("reppar", 70);
+        resevadas.put("elseparte", 71);
+        resevadas.put("variavel", 72);
+        resevadas.put("variavel1", 73);
+        resevadas.put("repvariavel ", 74);
+        resevadas.put("itemsaida", 75);
+        resevadas.put("repitem", 76);
+        resevadas.put("expressao", 77);
+        resevadas.put("repexpsimp", 78);
+        resevadas.put("expsimp", 79);
+        resevadas.put("repexp", 80);
+        resevadas.put("termo", 81);
+        resevadas.put("reptermo", 82);
+        resevadas.put("fator", 83);
+        resevadas.put("condcase", 84);
+        resevadas.put("contcase", 85);
+        resevadas.put("rpinteiro", 86);
         
 
         if (resevadas.containsKey(token.toLowerCase())) {

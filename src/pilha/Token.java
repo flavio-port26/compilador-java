@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package analizadorLexico;     
+package pilha;     
 
 /**
  *
@@ -13,6 +13,14 @@ public class Token {
     private String nome;
     private int codigo;
 
+    public int getLinha() {
+        return linha;
+    }
+
+    public void setLinha(int linha) {
+        this.linha = linha;
+    }
+   private int linha;
 
  
 
@@ -38,5 +46,9 @@ public class Token {
     @Override
     public String toString() {
         return "Token: " + "nome= " + nome + ", codigo= " + codigo;
+    }
+
+    public String posicao() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
