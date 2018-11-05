@@ -19,7 +19,7 @@ public class AnalizadorLexico {
             if (Character.isWhitespace(texto.charAt(i))) { // espaço em branco
 
                 if (!aux.equals("")) {
-                    criaToken.monta(aux.trim(), contLinha);
+                    criaToken.montaLexico(aux.trim(), contLinha);
                     aux = "";
                 }
                 if (texto.charAt(i) == '\n') {
@@ -40,52 +40,58 @@ public class AnalizadorLexico {
                             i++;
                             atual = texto.charAt(i);
                         }
-                        criaToken.monta(inteiro, contLinha);
+                        criaToken.montaInteiro(inteiro, contLinha);
                         inteiro = "";
                         i--;
                     }
                 } else if (atual == ':') { //  :=
 
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
                     prox = texto.charAt(i + 1);
                     if (prox == '=') {
                         aux = atual.toString().trim() + prox.toString().trim();
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         i++;
                         aux = "";
                     } else {
 
-                        criaToken.monta(atual.toString().trim(), contLinha);
+                        criaToken.montaLexico(atual.toString().trim(), contLinha);
                     }
                 } else if (atual == ',' || atual == ';' || atual == ')' || atual == '[' || atual == ']') {// especiais
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
-                    criaToken.monta(atual.toString().trim(), contLinha);
+                    criaToken.montaLexico(atual.toString().trim(), contLinha);
 
                 } else if (atual == '<' || atual == '>') { //relacionais
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
                     prox = texto.charAt(i + 1);
-                    if (prox == '=') {
+                    if(atual=='<'&& prox=='>'){
+                       aux = atual.toString().trim() + prox.toString().trim();
+                       criaToken.montaLexico(aux.trim(), contLinha);
+                       i++;
+                       aux="";
+                    }
+                    else if (prox == '=') {
                         aux = atual.toString().trim() + prox.toString().trim();
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         i++;
 
                     } else {
 
-                        criaToken.monta(atual.toString().trim(), contLinha);
+                        criaToken.montaLexico(atual.toString().trim(), contLinha);
                     }
                 } else if (atual == '+' || atual == '-' || atual == '*' || atual == '/' || atual == '=') {   //aritimeticos
 
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
                     prox = texto.charAt(i + 1);
@@ -94,27 +100,32 @@ public class AnalizadorLexico {
                        
                     } else {
 
-                        criaToken.monta(atual.toString().trim(), contLinha);
+                        criaToken.montaLexico(atual.toString().trim(), contLinha);
                     }
                 } else if (atual == '.') {      //   ..
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
+                    if(i==texto.length()-1){
+                        criaToken.montaLexico(atual.toString(), contLinha);
+                      
+                    }else{
                     prox = texto.charAt(i + 1);
+                    
                     if (prox == '.') {
                         aux = atual.toString().trim() + prox.toString().trim();
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                         i++;
 
                     } else {
 
-                        criaToken.monta(atual.toString().trim(), contLinha);
+                        criaToken.montaLexico(atual.toString().trim(), contLinha);
                     }
-                } else if (atual.toString().trim().equals("'")) {        // literais
+                }} else if (atual.toString().trim().equals("'")) {        // literais
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
                     while (!atual.toString().trim().equals("'")) {
@@ -122,12 +133,12 @@ public class AnalizadorLexico {
                         i++;
                         atual = texto.charAt(i);
                     }
-                    criaToken.monta("literal", contLinha);
+                    criaToken.montaLexico("literal", contLinha);
 
                     i--;
                 } else if (atual == '(') { //comentarios
                     if (!aux.equals("")) {
-                        criaToken.monta(aux.trim(), contLinha);
+                        criaToken.montaLexico(aux.trim(), contLinha);
                         aux = "";
                     }
 
@@ -150,12 +161,12 @@ public class AnalizadorLexico {
 
                     } else {
 
-                        criaToken.monta(atual.toString().trim(), contLinha);
+                        criaToken.montaLexico(atual.toString().trim(), contLinha);
                     }
                 } else if(i==texto.length()-1){
                     if(!aux.equals("")){
                         aux+=atual.toString();
-                       criaToken.monta(aux.trim(), contLinha);
+                       criaToken.montaLexico(aux.trim(), contLinha);
                         aux = ""; 
                     }
                     

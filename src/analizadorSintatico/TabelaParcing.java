@@ -1,10 +1,18 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package analizadorSintatico;
 
-public class TabelaProducao {
+import pilha.Token;
+import java.util.Stack;
 
-    private String[][] matrizDeParsing = new String[100][100];
+public class TabelaParcing {
 
-    public TabelaProducao() {
+    private final String[][] matrizDeParsing = new String[100][100];
+
+    public TabelaParcing() {
         matrizDeParsing[52][1] = "Program|Identificador|;|BLOCO|.";
         matrizDeParsing[53][2] = "DCLROT|DCLCONST|DCLVAR|DCLPROC|CORPO";
         matrizDeParsing[53][3] = "DCLROT|DCLCONST|DCLVAR|DCLPROC|CORPO";
@@ -198,7 +206,11 @@ public class TabelaProducao {
         matrizDeParsing[86][46] = ",|Inteiro|RPINTEIRO";
     }
 
-    public String getDerivacao(int producao, int entrada) {
-        return matrizDeParsing[producao][entrada];
+    public String getDerivacao(int tabela1, int tabela2) {
+        return matrizDeParsing[tabela1][tabela2];
     }
 }
+    
+
+   
+

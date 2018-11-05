@@ -60,7 +60,7 @@ public class Verificador {
         resevadas.put(">=", 42);
         resevadas.put("<", 43);
         resevadas.put("<=", 44);
-        resevadas.put("< >", 45);
+        resevadas.put("<>", 45);
         resevadas.put(",", 46);
         resevadas.put(";", 47);
         resevadas.put("literal", 48);
@@ -77,7 +77,7 @@ public class Verificador {
         resevadas.put("dclvar", 59);
         resevadas.put("ldvar", 60);
         resevadas.put("tipo", 61);
-        resevadas.put("dclprod", 62);
+        resevadas.put("dclproc", 62);
         resevadas.put("defpar", 63);
         resevadas.put("corpo", 64);
         resevadas.put("repcomando", 65);
@@ -89,7 +89,7 @@ public class Verificador {
         resevadas.put("elseparte", 71);
         resevadas.put("variavel", 72);
         resevadas.put("variavel1", 73);
-        resevadas.put("repvariavel ", 74);
+        resevadas.put("repvariavel", 74);
         resevadas.put("itemsaida", 75);
         resevadas.put("repitem", 76);
         resevadas.put("expressao", 77);

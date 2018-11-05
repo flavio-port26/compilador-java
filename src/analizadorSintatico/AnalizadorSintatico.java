@@ -6,8 +6,12 @@
 package analizadorSintatico;
 
 import java.util.Stack;
-import pilha.MontaToken;
+
 import pilha.Token;
+import pilha.Verificador;
+
+import pilha.Inverter;
+import analizadorSintatico.tabelaSintatica;
 
 /**
  *
@@ -15,34 +19,75 @@ import pilha.Token;
  */
 public class AnalizadorSintatico {
 
-    private final Stack<Token> entrada;
-    private  Producao montar;
-    MontaToken producao= new MontaToken();
+    Stack<Token> entrada;
+    Stack<Token> pilhaprod = new Stack();
+    Token producao = new Token();
+    Verificador id = new Verificador();
+
     public AnalizadorSintatico(Stack<Token> entrada) {
         this.entrada = entrada;
 
     }
 
-    public void analisar()  {
-    String inicial="programa";
-    producao.monta(inicial, 0);
-        while (!entrada.empty()) {
-     
-            if (entrada.peek().getCodigo() < 52) {
-                if (entrada.peek().getCodigo() == producao.pilha().peek().getCodigo()) {
+    public String analisar() {
+        producao.setNome("programa");
+        producao.setCodigo(id.identReservada("programa"));
+        pilhaprod.push(producao);
+        Inverter inv = new Inverter();
+        inv.inverte(entrada);
+        entrada = inv.pilha();
+        String erro = "";
+        int entradacod;
+        int prodcod;
+
+        while (!pilhaprod.empty()) {
+
+            if (entrada.empty()) {
+                erro = "pilha de tokens esta vazia e ainda existe producoes";
+                tabelaSintatica tab = new tabelaSintatica(pilhaprod);
+
+            }
+            else if (pilhaprod.peek().getCodigo() < 52) {
+
+                if (entrada.peek().getCodigo() == pilhaprod.peek().getCodigo()) {
                     entrada.pop();
-                    producao.pilha().pop();
+                    pilhaprod.pop();
                 } else {
-                    System.out.println("erro");//erro
+
+                    erro += ("\n erro na linha: " + entrada.pop().getLinha() + "era esperado um " + pilhaprod.pop().getNome());
+                    break;
+
                 }
             } else {
-                
-               producao=montar.derivar(entrada.peek().getCodigo(), producao.pilha().pop().getCodigo());
+
+                entradacod = entrada.peek().getCodigo();
+                prodcod = pilhaprod.peek().getCodigo();
+                TabelaProducao tabela = new TabelaProducao();
+                String derivaçao = tabela.getDerivacao(prodcod, entradacod);
+
+                pilhaprod.pop();
+                if (derivaçao == null) {
+                    continue;
+
+                }
+                String[] prodsepar = derivaçao.split("\\|");
+                if (prodsepar[0].equals("NULL")) {
+                    continue;
+                }
+                for (int i = prodsepar.length - 1; i >= 0; i--) {
+                    producao = new Token();
+                    producao.setCodigo(id.identReservada(prodsepar[i]));
+                    producao.setNome(prodsepar[i]);
+                    pilhaprod.push(producao);
+                }
+
             }
         }
-        if (!entrada.empty() || !producao.pilha().isEmpty()) {
-            System.out.println("erro"); //erro
+
+        System.out.println("deu tudo certo");
+        if (erro.isEmpty()) {
+            return "Deu tudo certo!";
         }
-        System.out.println("deutudo certo");
+        return erro;
     }
 }

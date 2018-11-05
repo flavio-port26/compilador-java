@@ -11,22 +11,35 @@ import java.util.Stack;
  *
  * @author comp15
  */
-public class MontaToken {  
+public class MontaToken {
+
     String nome;
-     Stack<Token> pilha = new Stack();
-     Token token;
-     Verificador id = new Verificador();
-    public void monta(String nome, int linha){
-        this.nome=nome;
-        
-                    token = Token.novoToken();
-                    token.setLinha(linha);
-                    token.setCodigo(id.identReservada(nome));
-                    token.setNome(nome);
-                    pilha.push(token);
+    Stack<Token> pilha = new Stack();
+    Token token;
+    Verificador id = new Verificador();
+
+    public void montaLexico(String nome, int linha) {
+        this.nome = nome;
+
+        token = Token.novoToken();
+        token.setLinha(linha);
+        token.setCodigo(id.identReservada(nome));
+        token.setNome(nome);
+        pilha.push(token);
     }
-    public Stack<Token> pilha(){
+
+    public void montaInteiro(String nome, int linha) {
+        this.nome = nome;
+
+        token = Token.novoToken();
+        token.setLinha(linha);
+        token.setCodigo(id.identReservada("inteiro"));
+        token.setNome(nome);
+        pilha.push(token);
+    }
+
+    public Stack<Token> pilha() {
         return pilha;
     }
-    
+
 }

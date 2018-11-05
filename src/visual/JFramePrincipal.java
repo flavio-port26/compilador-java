@@ -7,10 +7,11 @@ package visual;
 
 import analizadorLexico.tabelaLexica;
 import analizadorLexico.AnalizadorLexico;
+import analizadorSemantico.AnalizadorSemantico;
 import pilha.MontaToken;
 import pilha.Token;
 import analizadorSintatico.AnalizadorSintatico;
-import analizadorSintatico.tabelaSintatica;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +19,7 @@ import java.util.Stack;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
+
 
 
 /**
@@ -51,8 +53,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jTable1 = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaLexica = new javax.swing.JTable();
-        jTabbedPaneConsole = new javax.swing.JTabbedPane();
         botaoSintatico = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        campoErro = new javax.swing.JTextArea();
+        botaoSemantico = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenuArc = new javax.swing.JMenu();
         jMenuItemSalvar = new javax.swing.JMenuItem();
@@ -134,13 +138,21 @@ public class JFramePrincipal extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(tabelaLexica);
 
-        jTabbedPaneConsole.setVisible(false);
-        jTabbedPaneConsole.setName(""); // NOI18N
-
         botaoSintatico.setText("Analize Sintatica");
         botaoSintatico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoSintaticoActionPerformed(evt);
+            }
+        });
+
+        campoErro.setColumns(20);
+        campoErro.setRows(5);
+        jScrollPane4.setViewportView(campoErro);
+
+        botaoSemantico.setText("Analize Semantica");
+        botaoSemantico.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoSemanticoActionPerformed(evt);
             }
         });
 
@@ -204,19 +216,24 @@ public class JFramePrincipal extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(37, 37, 37)
+                                .addComponent(botaoLexico)
+                                .addGap(30, 30, 30)
+                                .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
+                                .addComponent(botaoSemantico, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jTabbedPaneConsole))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 800, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(37, 37, 37)
-                        .addComponent(botaoLexico)
-                        .addGap(30, 30, 30)
-                        .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jScrollPane4)))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -230,11 +247,12 @@ public class JFramePrincipal extends javax.swing.JFrame {
                         .addGap(7, 7, 7)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botaoLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(botaoSemantico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTabbedPaneConsole, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -258,7 +276,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void botaoLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLexicoActionPerformed
         jTable1.setVisible(true);
         tabelaLexica.setVisible(true);
-        jTabbedPaneConsole.setVisible(true);       
+        campoErro.setVisible(true);       
         AnalizadorLexico lexico= new AnalizadorLexico();
         MontaToken pega= new MontaToken();
         Stack<Token> pilha = new Stack();
@@ -313,13 +331,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemSalvarComoActionPerformed
 
     private void botaoSintaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSintaticoActionPerformed
-        jTable1.setVisible(true);
         tabelaLexica.setVisible(true);
-        jTabbedPaneConsole.setVisible(true);       
         AnalizadorSintatico sintatico= new AnalizadorSintatico(salvaPilha);       
-        sintatico.analisar();
-    
+        String mensagem = sintatico.analisar();
+        campoErro.setVisible(true);
+        campoErro.setText(mensagem);
+       
     }//GEN-LAST:event_botaoSintaticoActionPerformed
+
+    private void botaoSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSemanticoActionPerformed
+      AnalizadorSemantico semantico = new AnalizadorSemantico();
+      semantico.analiza(salvaPilha);
+    }//GEN-LAST:event_botaoSemanticoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -359,7 +382,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextArea areaTxt;
     private javax.swing.JButton botaoLexico;
+    private javax.swing.JButton botaoSemantico;
     private javax.swing.JButton botaoSintatico;
+    private javax.swing.JTextArea campoErro;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenuArc;
     private javax.swing.JMenuBar jMenuBar1;
@@ -371,7 +396,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTabbedPane jTabbedPaneConsole;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTable jTable1;
     private javax.swing.JTable tabelaLexica;
     // End of variables declaration//GEN-END:variables
