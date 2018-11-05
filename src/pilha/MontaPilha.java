@@ -21,7 +21,7 @@ public class MontaPilha {
         
                     token = Token.novoToken();
                    
-                    token.setCodigo(id.tabela(nome));
+                    token.setCodigo(id.identReservada(nome));
                     token.setNome(nome);
                     pilha.push(token);
     }
