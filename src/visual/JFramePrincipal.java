@@ -336,7 +336,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         tabelaSintatica.setVisible(true);
         AnalizadorSintatico sintatico = new AnalizadorSintatico(salvaPilha);
 
-        String mensagem = sintatico.analisar();
+        String mensagem = sintatico.analisar(tabelaSintatica,tabelaLexica);
 
         campoErro.setVisible(true);
         campoErro.setText(mensagem);

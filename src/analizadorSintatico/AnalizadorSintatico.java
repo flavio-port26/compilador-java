@@ -5,6 +5,7 @@
  */
 package analizadorSintatico;
 
+import analizadorLexico.tabelaLexica;
 import java.util.Stack;
 
 import pilha.Token;
@@ -12,6 +13,7 @@ import pilha.Verificador;
 
 import pilha.Inverter;
 import analizadorSintatico.tabelaSintatica;
+import javax.swing.JTable;
 
 /**
  *
@@ -29,7 +31,7 @@ public class AnalizadorSintatico {
 
     }
 
-    public String analisar() {
+  public String analisar(JTable tabelaSintatica, JTable tabelaLexica) {
         producao.setNome("programa");
         producao.setCodigo(id.identReservada("programa"));
         pilhaprod.push(producao);
@@ -41,10 +43,13 @@ public class AnalizadorSintatico {
         int prodcod;
 
         while (!pilhaprod.empty()) {
+              entradacod = entrada.peek().getCodigo();
+              prodcod = pilhaprod.peek().getCodigo();
 
             if (entrada.empty()) {
                 erro = "pilha de tokens esta vazia e ainda existe producoes";
                 tabelaSintatica tab = new tabelaSintatica(pilhaprod);
+                tabelaSintatica.setModel(tab);
                 break;
 
             } else if (pilhaprod.peek().getCodigo() < 52) {
@@ -54,21 +59,23 @@ public class AnalizadorSintatico {
                     pilhaprod.pop();
                 } else {
 
-                    erro = ("\n erro na linha: " + entrada.pop().getLinha() + "era esperado um " + pilhaprod.pop().getNome());
+                    erro = ("\n erro na linha: " + entrada.peek().getLinha() + "era esperado um " + pilhaprod.peek().getNome());
                     tabelaSintatica tabela = new tabelaSintatica(pilhaprod);
+                    tabelaSintatica.setModel(tabela);
+                    tabelaLexica tab = new tabelaLexica(entrada);
+                    tabelaLexica.setModel(tab); 
                     break;
 
                 }
             } else {
 
-                entradacod = entrada.peek().getCodigo();
-                prodcod = pilhaprod.peek().getCodigo();
+              
                 TabelaProducao tabela = new TabelaProducao();
                 String derivaçao = tabela.getDerivacao(prodcod, entradacod);
                 pilhaprod.pop();
 
                 if (derivaçao == null) {
-               continue;
+                    continue;
 
                 }
                 String[] prodsepar = derivaçao.split("\\|");
@@ -83,21 +90,23 @@ public class AnalizadorSintatico {
                 }
 
             }
-        } if (!entrada.empty()) {
-                erro = "ainda tem tokens e nao ha mais producoes";
-                tabelaSintatica tab = new tabelaSintatica(pilhaprod);
-                
-              
+        }
+        if(erro!="") {
+           erro +=" ";
+        }
+        else if (!entrada.empty()) {
+            tabelaLexica tab = new tabelaLexica(pilhaprod);
+                tabelaLexica.setModel(tab);
 
-            }
-
-        else if (pilhaprod.empty() && !entrada.empty()) {
+        } else if (pilhaprod.empty() && !entrada.empty()) {
             erro = "A pilha de producoes esta vazia era esperado um program";
 
-        } else {
-            erro = "executado com sucesso";
         }
-        return erro;
-
+        else{
+            erro = "executado com sucesso";
+            
+        }
+ 
+      return erro;
     }
 }
