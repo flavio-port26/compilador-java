@@ -44,10 +44,10 @@ public class tabelaSintatica extends AbstractTableModel {
     @Override
     public Object getValueAt(int linha, int coluna) {
         if(coluna == 0){
-            return bufferTokens.get(linha).getCodigo();
+            return bufferTokens.get(linha).getNome();
         } 
         else {
-            return  bufferTokens.get(linha).getLinha();
+            return  bufferTokens.get(linha).getCodigo();
         }
     }
     }

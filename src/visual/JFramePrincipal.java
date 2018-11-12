@@ -11,6 +11,7 @@ import analizadorSemantico.AnalizadorSemantico;
 import pilha.MontaToken;
 import pilha.Token;
 import analizadorSintatico.AnalizadorSintatico;
+import analizadorSintatico.tabelaSintatica;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -20,16 +21,15 @@ import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.border.Border;
 
-
-
 /**
  *
  * @author Clarita
  */
 public class JFramePrincipal extends javax.swing.JFrame {
+
     visual.Compiladores comp = new visual.Compiladores();
     private Stack<Token> salvaPilha;
-    
+
     /**
      * Creates new form JFramePrincipal
      */
@@ -50,7 +50,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         areaTxt = new javax.swing.JTextArea();
         botaoLexico = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tabelaSintatica = new javax.swing.JTable();
         jScrollPane3 = new javax.swing.JScrollPane();
         tabelaLexica = new javax.swing.JTable();
         botaoSintatico = new javax.swing.JButton();
@@ -80,8 +80,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTable1.setVisible(false);
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tabelaSintatica.setVisible(false);
+        tabelaSintatica.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null},
                 {null, null},
@@ -107,7 +107,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(jTable1);
+        jScrollPane2.setViewportView(tabelaSintatica);
 
         tabelaLexica.setVisible(false);
         tabelaLexica.setModel(new javax.swing.table.DefaultTableModel(
@@ -245,10 +245,11 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(7, 7, 7)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(botaoLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(botaoSemantico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(botaoSemantico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(botaoLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -274,19 +275,19 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemNovoActionPerformed
 
     private void botaoLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLexicoActionPerformed
-        jTable1.setVisible(true);
+        tabelaSintatica.setVisible(true);
         tabelaLexica.setVisible(true);
-        campoErro.setVisible(true);       
-        AnalizadorLexico lexico= new AnalizadorLexico();
-        MontaToken pega= new MontaToken();
+        campoErro.setVisible(true);
+        AnalizadorLexico lexico = new AnalizadorLexico();
+        MontaToken pega = new MontaToken();
         Stack<Token> pilha = new Stack();
         lexico.analizar(areaTxt.getText());
         pega = lexico.pegaPilha();
-        pilha= pega.pilha();
-        tabelaLexica tabela= new tabelaLexica(pilha);
+        pilha = pega.pilha();
+        tabelaLexica tabela = new tabelaLexica(pilha);
         tabelaLexica.setModel(tabela);
-        salvaPilha = (Stack)pilha.clone();
-       
+        salvaPilha = (Stack) pilha.clone();
+
     }//GEN-LAST:event_botaoLexicoActionPerformed
 
     private void jMenuItemSalvarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalvarActionPerformed
@@ -295,7 +296,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         File selFile = fc.getSelectedFile();
         String text = areaTxt.getText();
         String salvo = comp.Salvar(selFile, text);
-        if(salvo == "1"){
+        if (salvo == "1") {
             JOptionPane.showMessageDialog(this, "Salvo com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Operação cancelada.");
@@ -306,10 +307,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         JFileChooser fc = new JFileChooser();
         fc.showOpenDialog(this);
         File selFile = fc.getSelectedFile();
-        
+
         String texto;
         texto = comp.lerArquivo(selFile);
-        
+
         areaTxt.setText(texto);
     }//GEN-LAST:event_jMenuItemBuscaActionPerformed
 
@@ -323,7 +324,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         File selFile = fc.getSelectedFile();
         String text = areaTxt.getText();
         String salvo = comp.SalvarComo(selFile, text);
-        if(salvo == "1"){
+        if (salvo == "1") {
             JOptionPane.showMessageDialog(this, "Salvo com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Operação cancelada.");
@@ -332,16 +333,20 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
     private void botaoSintaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSintaticoActionPerformed
         tabelaLexica.setVisible(true);
-        AnalizadorSintatico sintatico= new AnalizadorSintatico(salvaPilha);       
+        tabelaSintatica.setVisible(true);
+        AnalizadorSintatico sintatico = new AnalizadorSintatico(salvaPilha);
+
         String mensagem = sintatico.analisar();
+
         campoErro.setVisible(true);
         campoErro.setText(mensagem);
-       
+
+
     }//GEN-LAST:event_botaoSintaticoActionPerformed
 
     private void botaoSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSemanticoActionPerformed
-      AnalizadorSemantico semantico = new AnalizadorSemantico();
-      semantico.analiza(salvaPilha);
+        AnalizadorSemantico semantico = new AnalizadorSemantico();
+        semantico.analiza(salvaPilha);
     }//GEN-LAST:event_botaoSemanticoActionPerformed
 
     /**
@@ -397,7 +402,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTable tabelaLexica;
+    private javax.swing.JTable tabelaSintatica;
     // End of variables declaration//GEN-END:variables
 }

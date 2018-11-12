@@ -45,16 +45,17 @@ public class AnalizadorSintatico {
             if (entrada.empty()) {
                 erro = "pilha de tokens esta vazia e ainda existe producoes";
                 tabelaSintatica tab = new tabelaSintatica(pilhaprod);
+                break;
 
-            }
-            else if (pilhaprod.peek().getCodigo() < 52) {
+            } else if (pilhaprod.peek().getCodigo() < 52) {
 
                 if (entrada.peek().getCodigo() == pilhaprod.peek().getCodigo()) {
                     entrada.pop();
                     pilhaprod.pop();
                 } else {
 
-                    erro += ("\n erro na linha: " + entrada.pop().getLinha() + "era esperado um " + pilhaprod.pop().getNome());
+                    erro = ("\n erro na linha: " + entrada.pop().getLinha() + "era esperado um " + pilhaprod.pop().getNome());
+                    tabelaSintatica tabela = new tabelaSintatica(pilhaprod);
                     break;
 
                 }
@@ -64,10 +65,10 @@ public class AnalizadorSintatico {
                 prodcod = pilhaprod.peek().getCodigo();
                 TabelaProducao tabela = new TabelaProducao();
                 String derivaçao = tabela.getDerivacao(prodcod, entradacod);
-
                 pilhaprod.pop();
+
                 if (derivaçao == null) {
-                    continue;
+               continue;
 
                 }
                 String[] prodsepar = derivaçao.split("\\|");
@@ -82,12 +83,21 @@ public class AnalizadorSintatico {
                 }
 
             }
-        }
+        } if (!entrada.empty()) {
+                erro = "ainda tem tokens e nao ha mais producoes";
+                tabelaSintatica tab = new tabelaSintatica(pilhaprod);
+                
+              
 
-        System.out.println("deu tudo certo");
-        if (erro.isEmpty()) {
-            return "Deu tudo certo!";
+            }
+
+        else if (pilhaprod.empty() && !entrada.empty()) {
+            erro = "A pilha de producoes esta vazia era esperado um program";
+
+        } else {
+            erro = "executado com sucesso";
         }
         return erro;
+
     }
 }
