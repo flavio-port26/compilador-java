@@ -15,8 +15,8 @@ import java.util.Stack;
  */
 public class Variaveis {
 
-    int tipo;
-    int categoria;
+    String tipo;
+    String categoria;
     String nome;
     int nivel;
 
@@ -27,19 +27,19 @@ public class Variaveis {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
-    public int getTipo() {
+    public String getTipo() {
         return tipo;
     }
 
-    public void setTipo(int cod) {
+    public void setTipo(String cod) {
         this.tipo = cod;
     }
 
-    public int getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(int categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
 
