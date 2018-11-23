@@ -6,8 +6,6 @@
 package analizadorSintatico;
 
 import pilha.MontaPilha;
-import pilha.Token;
-import java.util.Stack;
 
 /**
  *
@@ -15,8 +13,8 @@ import java.util.Stack;
  */
 public class Derivacao {
 
-    TabelaParcing tabela = new TabelaParcing();
-    int pilha2;
+    private TabelaParcing tabela = new TabelaParcing();
+    private final int pilha2;
 
     MontaPilha pilha = new MontaPilha();
 

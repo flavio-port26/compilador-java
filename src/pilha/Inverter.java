@@ -13,7 +13,7 @@ import java.util.Stack;
  */
 public class Inverter {
     private Token insere;
-    private Stack<Token> nova= new Stack<>();
+    private final Stack<Token> nova= new Stack<>();
     public void inverte(Stack<Token> velha){
         
         

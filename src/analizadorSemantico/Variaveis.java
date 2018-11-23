@@ -7,7 +7,6 @@ package analizadorSemantico;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Stack;
 
 /**
  *
@@ -15,10 +14,10 @@ import java.util.Stack;
  */
 public class Variaveis {
 
-    String tipo;
-    String categoria;
-    String nome;
-    int nivel;
+    private String tipo;
+    private String categoria;
+    private String nome;
+    private int nivel;
 
     public int getNivel() {
         return nivel;
@@ -27,6 +26,7 @@ public class Variaveis {
     public void setNivel(int nivel) {
         this.nivel = nivel;
     }
+
     public String getTipo() {
         return tipo;
     }
@@ -58,10 +58,9 @@ public class Variaveis {
         categorias.put("const", 3);
         categorias.put("label", 4);
         categorias.put("procedure", 5);
-           if (categorias.containsKey(nome.toLowerCase())) {
+        if (categorias.containsKey(nome.toLowerCase())) {
             return categorias.get(nome.toLowerCase());
-        } 
-         else {
+        } else {
             return 6;
         }
     }

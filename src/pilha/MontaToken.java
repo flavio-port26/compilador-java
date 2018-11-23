@@ -13,10 +13,10 @@ import java.util.Stack;
  */
 public class MontaToken {
 
-    String nome;
-    Stack<Token> pilha = new Stack();
-    Token token;
-    Verificador id = new Verificador();
+    private String nome;
+    private final Stack<Token> pilha = new Stack();
+    private Token token;
+    private final Verificador id = new Verificador();
 
     public void montaLexico(String nome, int linha) {
         this.nome = nome;

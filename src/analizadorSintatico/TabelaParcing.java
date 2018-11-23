@@ -5,9 +5,6 @@
  */
 package analizadorSintatico;
 
-import pilha.Token;
-import java.util.Stack;
-
 public class TabelaParcing {
 
     private final String[][] matrizDeParsing = new String[100][100];
@@ -210,7 +207,3 @@ public class TabelaParcing {
         return matrizDeParsing[tabela1][tabela2];
     }
 }
-    
-
-   
-

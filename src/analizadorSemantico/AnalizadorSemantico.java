@@ -5,7 +5,7 @@
  */
 package analizadorSemantico;
 
-import java.util.ArrayList;
+
 import java.util.Stack;
 import pilha.Inverter;
 import pilha.Token;
@@ -16,19 +16,20 @@ import pilha.Token;
  */
 public class AnalizadorSemantico {
 
+    private int nivel;
+    private String tipo;
+    private String categoria = "";
+    private int entrada;
+
     public void analiza(Stack<Token> vpilha) {
         Inverter inv = new Inverter();
-        Stack<Token> pilha = new Stack<>();
+        Stack<Token> pilha;
         inv.inverte(vpilha);
         pilha = inv.pilha();
-        int nivel = 1;
-        String tipo;
-        String categoria = "";
-        int entrada;
-        ArrayList<Variaveis> variaveis = new ArrayList<>();
-
+        TabelaSimbolos tabela = new TabelaSimbolos();
+        nivel = 1;
         while (!pilha.isEmpty()) {
-            nivel = 1;
+
             entrada = pilha.pop().getCodigo();
             switch (entrada) {
                 case 2:
@@ -38,14 +39,13 @@ public class AnalizadorSemantico {
                     while (!isParada(entrada)) {
                         entrada = pilha.peek().getCodigo();
                         if (entrada == 25) {
-                            //adicionar o verificador
-                            Variaveis var = new Variaveis();
-                            var.setNivel(nivel);
-                            var.setCategoria(categoria);
-                            var.setTipo(tipo);
-                            var.setNome(pilha.peek().getNome().toLowerCase());
-                            variaveis.add(var);
-                            pilha.pop();
+                            int result = tabela.buscaTabela(pilha.peek().getNome());
+                            if (result == nivel) {
+                                //erro
+                            } else {
+                                tabela.adicionaTabela(nivel, categoria, tipo, pilha.peek().getNome());
+                                pilha.pop();
+                            }
                         }
                         pilha.pop();
                     }
@@ -57,18 +57,13 @@ public class AnalizadorSemantico {
                     while (!isParada(entrada)) {
                         entrada = pilha.peek().getCodigo();
                         if (entrada == 25) {
-                            if(variaveis.contains(pilha.peek().getNome())){
-                                Variaveis varn = new Variaveis();
-                                varn= variaveis.iterator().next();
-                                
-                                        }
-                            Variaveis var = new Variaveis();
-                            var.setNivel(nivel);
-                            var.setCategoria(categoria);
-                            var.setTipo(tipo);
-                            var.setNome(pilha.peek().getNome().toLowerCase());
-                            variaveis.add(var);
-                            pilha.pop();
+                            int result = tabela.buscaTabela(pilha.peek().getNome());
+                            if (result == nivel) {
+                                //erro
+                            } else {
+                                tabela.adicionaTabela(nivel, categoria, tipo, pilha.peek().getNome());
+                                pilha.pop();
+                            }
                         }
                         pilha.pop();
                     }
@@ -80,40 +75,42 @@ public class AnalizadorSemantico {
                     while (!isParada(entrada)) {
                         entrada = pilha.peek().getCodigo();
                         if (entrada == 25) {
-                            //adicionar o verificador
-                            Variaveis var = new Variaveis();
-                            var.setNivel(nivel);
-                            var.setCategoria(categoria);
-                            var.setTipo(tipo);
-                            var.setNome(pilha.peek().getNome().toLowerCase());
-                            variaveis.add(var);
-                            pilha.pop();
+                            int result = tabela.buscaTabela(pilha.peek().getNome());
+                            if (result == nivel) {
+                                //erro
+                            } else {
+                                tabela.adicionaTabela(nivel, categoria, tipo, pilha.peek().getNome());
+                                pilha.pop();
+                            }
+                        }
+                        pilha.pop();
+                    }
+                    break;
+                case 5:
+                    categoria = "procedure";
+                    tipo = "verificar";
+                    nivel = 2;
+                    entrada = pilha.pop().getCodigo();
+
+                    while (!isParada(entrada)) {
+                        entrada = pilha.peek().getCodigo();
+                        if (entrada == 7) {
+                            nivel = 1;
+                        }
+                        if (entrada == 25) {
+                            int result = tabela.buscaTabela(pilha.peek().getNome());
+                            if (result == nivel) {
+                                //erro
+                            } else {
+                                tabela.adicionaTabela(nivel, categoria, tipo, pilha.peek().getNome());
+                                pilha.pop();
+                            }
                         }
                         pilha.pop();
                     }
                     break;
                 default:
                     break;
-            }
-            if (entrada == 5) {
-                nivel = 2;
-                categoria = "procedure";
-                tipo = "verificar";
-                entrada = pilha.pop().getCodigo();
-                while (!isParada(entrada)) {
-                    entrada = pilha.peek().getCodigo();
-                    if (entrada == 25) {
-                        //adicionar o verificador
-                        Variaveis var = new Variaveis();
-                        var.setNivel(nivel);
-                        var.setCategoria(categoria);
-                        var.setTipo(tipo);
-                        var.setNome(pilha.peek().getNome().toLowerCase());
-                        variaveis.add(var);
-                        pilha.pop();
-                    }
-                    pilha.pop();
-                }
             }
 
         }

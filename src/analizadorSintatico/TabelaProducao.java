@@ -2,7 +2,7 @@ package analizadorSintatico;
 
 public class TabelaProducao {
 
-    private String[][] matrizDeParsing = new String[100][100];
+    private final String[][] matrizDeParsing = new String[100][100];
 
     public TabelaProducao() {
         matrizDeParsing[52][1] = "Program|Identificador|;|BLOCO|.";

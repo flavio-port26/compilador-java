@@ -8,25 +8,26 @@ package pilha;
 import java.util.HashMap;
 import java.util.Map;
 
-
 /**
  *
  * @author User
  */
 public class Verificador {
+
+    private final Map<String, Integer> resevadas = new HashMap<>();
+
     public int identReservada(String token) {
-        
-        Map<String, Integer> resevadas = new HashMap<>();
-        resevadas.put("program",1);
-        resevadas.put("label",2);
-        resevadas.put("const",3);
-        resevadas.put("var",4);
-        resevadas.put("procedure",5);
-        resevadas.put("begin",6);
-        resevadas.put("end",7);
-        resevadas.put("integer",8);
-        resevadas.put("array",9);
-        resevadas.put("of",10);
+
+        resevadas.put("program", 1);
+        resevadas.put("label", 2);
+        resevadas.put("const", 3);
+        resevadas.put("var", 4);
+        resevadas.put("procedure", 5);
+        resevadas.put("begin", 6);
+        resevadas.put("end", 7);
+        resevadas.put("integer", 8);
+        resevadas.put("array", 9);
+        resevadas.put("of", 10);
         resevadas.put("call", 11);
         resevadas.put("goto", 12);
         resevadas.put("if", 13);
@@ -102,12 +103,10 @@ public class Verificador {
         resevadas.put("condcase", 84);
         resevadas.put("contcase", 85);
         resevadas.put("rpinteiro", 86);
-        
 
         if (resevadas.containsKey(token.toLowerCase())) {
             return resevadas.get(token.toLowerCase());
-        } 
-         else {
+        } else {
             return 25;
         }
     }
