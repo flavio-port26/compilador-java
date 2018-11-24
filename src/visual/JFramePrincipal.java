@@ -355,7 +355,9 @@ public class JFramePrincipal extends javax.swing.JFrame {
         tabelaLexica.setVisible(true);
         tabelaSintatica.setVisible(true);
         tabelaVariaveis.setVisible(false);
-        AnalizadorSintatico sintatico = new AnalizadorSintatico(salvaPilha);
+        Stack<Token> pilha = new Stack<>();
+        pilha=(Stack)salvaPilha.clone();
+        AnalizadorSintatico sintatico = new AnalizadorSintatico(pilha);
 
         String mensagem = sintatico.analisar(tabelaSintatica, tabelaLexica);
 
@@ -369,9 +371,10 @@ public class JFramePrincipal extends javax.swing.JFrame {
         tabelaLexica.setVisible(false);
         tabelaSintatica.setVisible(false);
         tabelaVariaveis.setVisible(true);
-
+         Stack<Token> pilha = new Stack<>();
+        pilha=(Stack)salvaPilha.clone();
         AnalizadorSemantico semantico = new AnalizadorSemantico();
-        semantico.analiza(salvaPilha);
+        semantico.analiza(pilha);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
