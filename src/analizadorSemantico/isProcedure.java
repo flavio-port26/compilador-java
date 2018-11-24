@@ -6,57 +6,66 @@
 package analizadorSemantico;
 
 import java.util.Stack;
-import pilha.Inverter;
 import pilha.Token;
 
 /**
  *
- * @author comp15
+ * @author User
  */
-public class AnalizadorSemantico {
+public class isProcedure {
 
-    private int nivel;
-    private int tipo;
-    private String categoria;
-    private int entrada;
-    private String nome;
+    int nivel = 2;
+    String categoria;
+    int tipo;
 
-    public void analiza(Stack<Token> vpilha) {
-        Inverter inv = new Inverter();
-        Stack<Token> pilha;
-        inv.inverte(vpilha);
-        pilha = inv.pilha();
-        TabelaSimbolos tabela = new TabelaSimbolos();
-        nivel = 1;
-        while (!pilha.isEmpty()) {
+    public Stack<Token> analiza(Stack<Token> pilha, TabelaSimbolos tabela) {
+        categoria = "procedure";
+        String nome = pilha.peek().getNome();
+        int entrada = pilha.peek().getCodigo();
+        pilha.pop();
+        entrada = pilha.peek().getCodigo();
+        while (entrada != 47) {
+            String nomeProcedure = pilha.peek().getNome();
+            entrada = pilha.peek().getCodigo();
+            nome = pilha.peek().getNome();
+           
+                if (entrada == 25) {
+                    int result = tabela.buscaTabela(pilha.peek().getNome());
+                    if (result == nivel) {
+                        System.out.println("nome da procedure ja existe na lista");
+                    } else {
+                        String nomerocedure=nome;
 
-            int entrada = pilha.peek().getCodigo();
-            String nome = pilha.peek().getNome();
-            switch (entrada) {
-                case 1:
-                    categoria = "rotulo";
-                    tipo = 1;
-                    entrada = pilha.pop().getCodigo();
-                    while (entrada != 47) {
-                        entrada = pilha.peek().getCodigo();
-                        nome = pilha.peek().getNome();
-                        if (entrada == 25) {
-                            int result = tabela.buscaTabela(pilha.peek().getNome());
-                            if (result == nivel) {
-                                System.out.println("variavel ja existe na tabela");
-
-                                //erro
-                            } else {
-                                tabela.adicionaTabela(nivel, categoria, tipo, pilha.peek().getNome());
-
-                            }
-
-                        }
-                        pilha.pop();
+                        String nomevariavel = "";
+                        while (entrada != 37) {
+                                    entrada = pilha.peek().getCodigo();
+                                    nome = pilha.peek().getNome();
+                                    if (entrada == 25) {
+                                        result = tabela.buscaTabela(pilha.peek().getNome());
+                                        if (result == nivel) {
+                                            System.out.println("variavel ja existe na tabela");
+                                            break;
+                                        } else {
+                                            nomevariavel = pilha.peek().getNome();
+                                        }
+                                    }
+                                    if (entrada == 2 || entrada == 5 || entrada == 8) {
+                                        tipo = entrada;
+                                        tabela.adicionaTabela(nivel, categoria, tipo, nomerocedure);
+                                        tabela.adicionaTabela(nivel, categoria, tipo, nomevariavel);
+                                    }
+                                 pilha.pop();
+                                }
                     }
-                    break;
-
-                case 2:
+                }
+                pilha.pop();
+        }
+        entrada= pilha.peek().getCodigo();
+                nome= pilha.peek().getNome();
+        while(entrada!=7){
+            
+            switch(entrada){
+             case 2:
                     categoria = "label";
                     tipo = 2;
                     entrada = pilha.pop().getCodigo();
@@ -113,36 +122,20 @@ public class AnalizadorSemantico {
                         pilha.pop();
                     }
                     break;
-                case 5:
-                    isProcedure procedure = new isProcedure();
-                      pilha=procedure.analiza(pilha,tabela);
-                    break;
-
-                case 25:
-                    int result = tabela.buscaTabela(nome);
-                    if (result != 99) {
-                        if (pilha.peek().getCodigo() == 36 || pilha.peek().getCodigo() == 38) {
-                            Variaveis var = new Variaveis();
-                            var = tabela.buscaCategoria(nome);
-                            while (pilha.peek().getCodigo() != 47) {
-
-                                pilha.pop();
-                            }
-                        }
-                    }
-                    break;
-                default:
-                    pilha.pop();
-                    break;
+                    default: 
+                        pilha.pop();
+                        break;
             }
-
+            
+            
+      
         }
-
+        return pilha;
     }
-
+                         
     public boolean isParada(int nome) {
         return nome == 2 || nome == 3 || nome == 4 || nome == 5 || nome == 6;
 
     }
-
-}
+        }
+ 

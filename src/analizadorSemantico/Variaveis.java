@@ -14,7 +14,7 @@ import java.util.Map;
  */
 public class Variaveis {
 
-    private String tipo;
+    private int tipo;
     private String categoria;
     private String nome;
     private int nivel;
@@ -27,11 +27,11 @@ public class Variaveis {
         this.nivel = nivel;
     }
 
-    public String getTipo() {
+    public int getTipo() {
         return tipo;
     }
 
-    public void setTipo(String cod) {
+    public void setTipo(int cod) {
         this.tipo = cod;
     }
 

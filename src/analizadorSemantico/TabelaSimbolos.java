@@ -14,7 +14,7 @@ import java.util.ArrayList;
 public class TabelaSimbolos {
    private final ArrayList<Variaveis> tabela = new ArrayList<>();
     
-    public void adicionaTabela(int nivel,String categoria,String tipo,String nome){
+    public void adicionaTabela(int nivel,String categoria,int tipo,String nome){
            Variaveis var = new Variaveis();
            var.setNivel(nivel);
            var.setCategoria(categoria);
