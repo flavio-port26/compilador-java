@@ -5,7 +5,6 @@
  */
 package analizadorSemantico;
 
-
 import java.util.Stack;
 import pilha.Inverter;
 import pilha.Token;
@@ -18,8 +17,9 @@ public class AnalizadorSemantico {
 
     private int nivel;
     private String tipo;
-    private String categoria = "";
+    private String categoria;
     private int entrada;
+    private String nome;
 
     public void analiza(Stack<Token> vpilha) {
         Inverter inv = new Inverter();
@@ -30,7 +30,8 @@ public class AnalizadorSemantico {
         nivel = 1;
         while (!pilha.isEmpty()) {
 
-            entrada = pilha.pop().getCodigo();
+            entrada = pilha.peek().getCodigo();
+            nome = pilha.pop().getNome();
             switch (entrada) {
                 case 2:
                     categoria = "label";
@@ -95,6 +96,7 @@ public class AnalizadorSemantico {
                     while (!isParada(entrada)) {
                         entrada = pilha.peek().getCodigo();
                         if (entrada == 7) {
+                            tabela.removeTabela();
                             nivel = 1;
                         }
                         if (entrada == 25) {
@@ -107,6 +109,19 @@ public class AnalizadorSemantico {
                             }
                         }
                         pilha.pop();
+                    }
+                    break;
+                case 25:
+                    int result = tabela.buscaTabela(nome);
+                    if (result != 99) {
+                        if (pilha.peek().getCodigo() == 36 || pilha.peek().getCodigo() == 38) {
+                            Variaveis var = new Variaveis();
+                            var = tabela.buscaCategoria(nome);
+                            while(pilha.peek().getCodigo()!=47){
+                            
+                                pilha.pop();
+                            }
+                        }
                     }
                     break;
                 default:

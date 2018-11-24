@@ -22,13 +22,24 @@ public class TabelaSimbolos {
            var.setNome(nome);
            tabela.add(var);
     }
-    public void removeTabela(String nome){
+    public void removeTabela(){
          for(int i=0;i<tabela.size();i++){
-            if(tabela.get(i).getNome().equals(nome)){
+            if(tabela.get(i).getNivel()==2 && !tabela.get(i).getCategoria().equals("procedure")){
                tabela.remove(i);
                 
             }
         }
+    }
+    public Variaveis buscaCategoria(String nome){
+       Variaveis var = new Variaveis();
+        for(int i=0;i<tabela.size();i++){
+            if(tabela.get(i).getNome().equals(nome)){
+                var=tabela.get(i);
+                
+            }
+           
+    }
+         return var;
     }
     public int buscaTabela(String nome){
         for(int i=0;i<tabela.size();i++){
