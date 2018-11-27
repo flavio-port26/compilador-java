@@ -233,22 +233,21 @@ public class JFramePrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botaoLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 710, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(19, 19, 19))))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(11, 11, 11))
         );
 
         pack();
@@ -266,7 +265,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void botaoLexicoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLexicoActionPerformed
         tabelaLexica.setVisible(true);
         tabelaSintatica.setVisible(true);
-      
+
         campoErro.setVisible(true);
         AnalizadorLexico lexico = new AnalizadorLexico();
         MontaToken pega = new MontaToken();
@@ -324,25 +323,28 @@ public class JFramePrincipal extends javax.swing.JFrame {
     private void botaoSintaticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSintaticoActionPerformed
         tabelaLexica.setVisible(true);
         tabelaSintatica.setVisible(true);
-  
+
         Stack<Token> pilha = new Stack<>();
-        pilha=(Stack)salvaPilha.clone();
+        pilha = (Stack) salvaPilha.clone();
         AnalizadorSintatico sintatico = new AnalizadorSintatico(pilha);
 
-        String mensagem = sintatico.analisar(tabelaSintatica, tabelaLexica);
+        String mensagem = "";
+        try {
+            mensagem = sintatico.analisar(tabelaSintatica, tabelaLexica);
+        } catch (Exception e) {
+            mensagem = e.getMessage();
+        }
 
         campoErro.setVisible(true);
         campoErro.setText(mensagem);
-
-
     }//GEN-LAST:event_botaoSintaticoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         tabelaLexica.setVisible(false);
         tabelaSintatica.setVisible(false);
-       
-         Stack<Token> pilha = new Stack<>();
-        pilha=(Stack)salvaPilha.clone();
+
+        Stack<Token> pilha = new Stack<>();
+        pilha = (Stack) salvaPilha.clone();
         AnalizadorSemantico semantico = new AnalizadorSemantico();
         semantico.analiza(pilha);
 
