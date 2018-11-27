@@ -34,7 +34,7 @@ public class AnalizadorSemantico {
             String nome = pilha.peek().getNome();
             switch (entrada) {
                 case 1:
-                    categoria = "rotulo";
+                    categoria = "program";
                     tipo = 1;
                     entrada = pilha.pop().getCodigo();
                     while (entrada != 47) {
@@ -57,7 +57,7 @@ public class AnalizadorSemantico {
                     break;
 
                 case 2:
-                    categoria = "label";
+                    categoria = "rotulo";
                     tipo = 2;
                     entrada = pilha.pop().getCodigo();
                     nome = pilha.peek().getNome();
