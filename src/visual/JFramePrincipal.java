@@ -73,7 +73,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jScrollPane1.setViewportView(areaTxt);
         areaTxt.setBorder((Border) new NumeredBorder());
 
-        botaoLexico.setText("Análise Léxica");
+        botaoLexico.setText("AnÃ¡lise LÃ©xica");
         botaoLexico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoLexicoActionPerformed(evt);
@@ -299,7 +299,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         if (salvo == "1") {
             JOptionPane.showMessageDialog(this, "Salvo com sucesso.");
         } else {
-            JOptionPane.showMessageDialog(this, "Operação cancelada.");
+            JOptionPane.showMessageDialog(this, "OperaÃ§Ã£o cancelada.");
         }
     }//GEN-LAST:event_jMenuItemSalvarActionPerformed
 
@@ -315,7 +315,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItemBuscaActionPerformed
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        JOptionPane.showMessageDialog(null, "Projeto de Compilador, desenvolvido por Juliano Augusto e Junior Port, para a matéria de compiladores.", "Compilador", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "Projeto de Compilador, desenvolvido por Juliano Augusto e Junior Port, para a matÃ©ria de compiladores.", "Compilador", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItemSalvarComoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItemSalvarComoActionPerformed
@@ -327,7 +327,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         if (salvo == "1") {
             JOptionPane.showMessageDialog(this, "Salvo com sucesso.");
         } else {
-            JOptionPane.showMessageDialog(this, "Operação cancelada.");
+            JOptionPane.showMessageDialog(this, "OperaÃ§Ã£o cancelada.");
         }
     }//GEN-LAST:event_jMenuItemSalvarComoActionPerformed
 
@@ -336,12 +336,14 @@ public class JFramePrincipal extends javax.swing.JFrame {
         tabelaSintatica.setVisible(true);
         AnalizadorSintatico sintatico = new AnalizadorSintatico(salvaPilha);
 
-        String mensagem = sintatico.analisar(tabelaSintatica,tabelaLexica);
-
-        campoErro.setVisible(true);
-        campoErro.setText(mensagem);
-
-
+        try {
+            String mensagem = sintatico.analisar(tabelaSintatica,tabelaLexica);
+            campoErro.setVisible(true);
+            campoErro.setText(mensagem);
+        } catch (Exception exception) {
+            campoErro.setVisible(true);
+            campoErro.setText(exception.getMessage());
+        }
     }//GEN-LAST:event_botaoSintaticoActionPerformed
 
     private void botaoSemanticoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoSemanticoActionPerformed

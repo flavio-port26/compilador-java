@@ -14,13 +14,11 @@ import java.util.Stack;
 public class Inverter {
     private Token insere;
     private Stack<Token> nova= new Stack<>();
-    public void inverte(Stack<Token> velha){
-        
-        
+    public Inverter inverte(Stack<Token> velha){
         while (!velha.empty()) {  
             nova.push(velha.pop());
             }
-        
+        return this;
      }
     public Stack<Token> pilha(){
         return nova;
