@@ -54,6 +54,7 @@ public class AnalizadorSemantico {
                 case 1:  // se for program ele roda ate o ; para excluir a variavel do nome do programa              
                     entrada = pilha.pop().getCodigo(); // proximo token
                     while (entrada != 47) {
+                        entrada= pilha.peek().getCodigo();
                         pilha.pop();
                     }
                     break;

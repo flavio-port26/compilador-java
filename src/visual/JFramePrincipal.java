@@ -64,6 +64,8 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("framePrincipal");
+        setExtendedState(JFramePrincipal.MAXIMIZED_BOTH);
 
         areaTxt.setColumns(20);
         areaTxt.setRows(5);
@@ -250,7 +252,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGap(11, 11, 11))
         );
 
-        pack();
+        setBounds(0, 0, 1174, 1177);
     }// </editor-fold>//GEN-END:initComponents
 
 
