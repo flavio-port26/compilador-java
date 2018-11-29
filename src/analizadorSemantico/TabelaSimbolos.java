@@ -22,9 +22,9 @@ public class TabelaSimbolos {
            var.setNome(nome);
            tabela.add(var);
     }
-    public void removeTabela(){
+    public void removeNivel2(){
          for(int i=0;i<tabela.size();i++){
-            if(tabela.get(i).getNivel()==2 && !tabela.get(i).getCategoria().equals("procedure")){
+            if(tabela.get(i).getNivel()==2){
                tabela.remove(i);
                 
             }
