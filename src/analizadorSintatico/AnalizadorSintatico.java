@@ -7,12 +7,9 @@ package analizadorSintatico;
 
 import analizadorLexico.tabelaLexica;
 import java.util.Stack;
-
 import pilha.Token;
 import pilha.Verificador;
-
 import pilha.Inverter;
-import analizadorSintatico.tabelaSintatica;
 import javax.swing.JTable;
 
 /**
@@ -89,6 +86,6 @@ public class AnalizadorSintatico {
             tabelaLexica.setModel(tab);
             throw new Exception("A pilha de producoes esta vazia era esperado um program");
         }
-        return "Executado com sucesso";
+        return "ANALIZADOR SINTATICO Executado com sucesso";
     }
 }

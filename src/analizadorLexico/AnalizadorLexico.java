@@ -7,8 +7,8 @@ public class AnalizadorLexico {
 
     private MontaToken criaToken = new MontaToken();
 
-    public void analizar(String texto) {
-
+    public String analizar(String texto){
+     
         Character prox;
         Character atual;
         int contLinha = 1;
@@ -177,7 +177,7 @@ public class AnalizadorLexico {
 
             }
         }
-
+return "ANALIZADOR LEXICO executado com sucesso";
     }
 
     public MontaToken pegaPilha() {

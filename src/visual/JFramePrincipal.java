@@ -8,7 +8,6 @@ package visual;
 import analizadorLexico.tabelaLexica;
 import analizadorLexico.AnalizadorLexico;
 import analizadorSemantico.AnalizadorSemantico;
-
 import pilha.MontaToken;
 import pilha.Token;
 import analizadorSintatico.AnalizadorSintatico;
@@ -132,6 +131,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         jScrollPane3.setViewportView(tabelaLexica);
 
         botaoSintatico.setText("Analize Sintatica");
+        botaoSintatico.setAlignmentY(2.5F);
         botaoSintatico.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 botaoSintaticoActionPerformed(evt);
@@ -212,19 +212,19 @@ public class JFramePrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(botaoLexico)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
-                        .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(141, 141, 141)
+                        .addComponent(botaoLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 151, Short.MAX_VALUE)
+                        .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 147, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(147, 147, 147)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 230, Short.MAX_VALUE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 800, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(60, 60, 60))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jScrollPane4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 317, Short.MAX_VALUE)
@@ -235,24 +235,24 @@ public class JFramePrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 899, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane3))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(botaoLexico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(botaoSintatico, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(29, 29, 29)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 703, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, 183, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11))
+                .addContainerGap(13, Short.MAX_VALUE))
         );
 
-        setBounds(0, 0, 1174, 1177);
+        setBounds(0, 0, 1174, 1067);
     }// </editor-fold>//GEN-END:initComponents
 
 
@@ -270,14 +270,18 @@ public class JFramePrincipal extends javax.swing.JFrame {
 
         campoErro.setVisible(true);
         AnalizadorLexico lexico = new AnalizadorLexico();
-        MontaToken pega = new MontaToken();
-        Stack<Token> pilha = new Stack();
-        lexico.analizar(areaTxt.getText());
+        MontaToken pega;
+        Stack<Token> pilha;
+        String msg;
+        msg = lexico.analizar(areaTxt.getText());
         pega = lexico.pegaPilha();
         pilha = pega.pilha();
         tabelaLexica tabela = new tabelaLexica(pilha);
         tabelaLexica.setModel(tabela);
         salvaPilha = (Stack) pilha.clone();
+        campoErro.setVisible(true);
+        campoErro.setText(msg);
+
 
     }//GEN-LAST:event_botaoLexicoActionPerformed
 
@@ -287,7 +291,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         File selFile = fc.getSelectedFile();
         String text = areaTxt.getText();
         String salvo = comp.Salvar(selFile, text);
-        if (salvo == "1") {
+        if (salvo.equals("1")) {
             JOptionPane.showMessageDialog(this, "Salvo com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Operação cancelada.");
@@ -315,7 +319,7 @@ public class JFramePrincipal extends javax.swing.JFrame {
         File selFile = fc.getSelectedFile();
         String text = areaTxt.getText();
         String salvo = comp.SalvarComo(selFile, text);
-        if (salvo == "1") {
+        if (salvo.equals("1")) {
             JOptionPane.showMessageDialog(this, "Salvo com sucesso.");
         } else {
             JOptionPane.showMessageDialog(this, "Operação cancelada.");
@@ -336,19 +340,26 @@ public class JFramePrincipal extends javax.swing.JFrame {
         } catch (Exception e) {
             mensagem = e.getMessage();
         }
-
         campoErro.setVisible(true);
         campoErro.setText(mensagem);
+
     }//GEN-LAST:event_botaoSintaticoActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        tabelaLexica.setVisible(false);
-        tabelaSintatica.setVisible(false);
-
-        Stack<Token> pilha = new Stack<>();
+        tabelaLexica.setVisible(rootPaneCheckingEnabled);
+        tabelaSintatica.setVisible(rootPaneCheckingEnabled);
+        Stack<Token> pilha;
         pilha = (Stack) salvaPilha.clone();
         AnalizadorSemantico semantico = new AnalizadorSemantico();
-        semantico.analiza(pilha);
+        String msg = "";
+        try {
+            msg = semantico.analiza(pilha);
+        } catch (Exception e) {
+            msg = e.getMessage();
+        }
+        campoErro.setVisible(true);
+        campoErro.setText(msg);
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
